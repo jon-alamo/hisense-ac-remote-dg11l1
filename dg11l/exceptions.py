@@ -1,8 +1,7 @@
-import dg11l.features as features
 
 
 class InvalidValue(ValueError):
-    def __init__(self, enum: features.BaseEnum):
+    def __init__(self, enum: "BaseEnum"):
         valid_values = ", ".join(enum.values())
         message = f"'{enum.name}' parameter's value one of: {valid_values}"
         super().__init__(message)
