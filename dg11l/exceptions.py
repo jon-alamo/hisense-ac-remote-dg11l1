@@ -1,4 +1,4 @@
-import controller.features as features
+import dg11l.features as features
 
 
 class InvalidValue(ValueError):
