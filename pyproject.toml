@@ -3,11 +3,10 @@ requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "hisense-ac-remote-dg11l1"
+name = "dg11l"
 version = "0.1"
 description = "Hisense AC remote DG11L1-12 model IR code generation."
 authors = [{name = "jon.alamo", email = "jonrivala@gmail.com"}]
 dependencies = ["broadlink"]
 readme = "README.md"
 license = {file = "LICENSE"}
-

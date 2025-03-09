@@ -3,7 +3,7 @@ import controller.exceptions as exc
 import json
 from enum import Enum
 
-with open('assets/base_codes.json', 'r') as f:
+with open('controller/assets/base_codes.json', 'r') as f:
     _codes = json.load(f)
 
 

@@ -1,5 +1,4 @@
 from functools import reduce
-import base64
 import typing as typ
 
 RAW_INIT = [38, 0, 92, 1, 0, 1, 29, 144]
