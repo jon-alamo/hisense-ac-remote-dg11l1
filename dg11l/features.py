@@ -108,18 +108,29 @@ def get_state_message(state: str):
     return encoder.compose_message({}, _codes['off'])
 
 
-def get_ifeel_sensor_message(ifeel_temp: int) -> list[int]:
+def get_ifeel_sensor_message(
+        ifeel_temp: int,
+        encoded: bool = True
+) -> list[int] | bytes:
     validate_parameters(ifeel_temp=ifeel_temp)
     temp_byte = _get_temp_sensor_part(ifeel_temp)
-    return encoder.compose_message(temp_byte, _codes['ifeel'])
+    message = encoder.compose_message(temp_byte, _codes['ifeel'])
+    if encoded:
+        return encoder.encode_message(message)
+    return message
 
 
 def get_operation_mode_message(
         fan_mode: str,
         mode: str,
-        temperature: int
-) -> list[int]:
+        temperature: int,
+        encoded: bool = True
+) -> list[int] | bytes:
     validate_parameters(fan_mode=fan_mode, mode=mode, temperature=temperature)
     base_code = _codes[fan_mode]
     mode_temp_part = _get_mode_and_temp_set_part(mode, temperature)
-    return encoder.compose_message(mode_temp_part, base_code)
+    message = encoder.compose_message(mode_temp_part, base_code)
+    if encoded:
+        return encoder.encode_message(message)
+    return message
+
