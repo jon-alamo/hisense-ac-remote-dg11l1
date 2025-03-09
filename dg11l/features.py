@@ -1,9 +1,10 @@
-import controller.encoder as encoder
-import controller.exceptions as exc
+import dg11l.encoder as encoder
+import dg11l.exceptions as exc
 import json
 from enum import Enum
 
-with open('controller/assets/base_codes.json', 'r') as f:
+
+with open('dg11l/assets/base_codes.json', 'r') as f:
     _codes = json.load(f)
 
 
