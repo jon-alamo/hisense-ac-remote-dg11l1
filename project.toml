@@ -10,3 +10,4 @@ authors = [{name = "jon.alamo", email = "jonrivala@gmail.com"}]
 dependencies = ["broadlink"]
 readme = "README.md"
 license = {file = "LICENSE"}
+
