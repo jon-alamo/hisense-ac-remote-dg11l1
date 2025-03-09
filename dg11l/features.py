@@ -1,10 +1,15 @@
+import importlib.resources
 import dg11l.encoder as encoder
 import dg11l.exceptions as exc
 import json
 from enum import Enum
 
 
-with open('dg11l/assets/base_codes.json', 'r') as f:
+def get_assets_path() -> str:
+    return str(importlib.resources.files("dg11l.assets") / "base_codes.json")
+
+
+with open(get_assets_path(), 'r') as f:
     _codes = json.load(f)
 
 
