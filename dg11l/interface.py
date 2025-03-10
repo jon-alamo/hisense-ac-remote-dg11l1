@@ -23,14 +23,11 @@ def send_remote_action(
         mode: str = None,
         temperature: int = None
 ):
-    if state is not None:
-        message = features.get_state_message(state)
-    elif ifeel_temp is not None:
-        message = features.get_ifeel_sensor_message(ifeel_temp)
-    elif fan_mode is not None and mode is not None and temperature is not None:
-        message = features.get_operation_mode_message(
-            fan_mode, mode, temperature
-        )
-    else:
-        raise ValueError('Invalid parameters')
+    message = features.get_remote_action_message(
+        state=state,
+        ifeel_temp=ifeel_temp,
+        fan_mode=fan_mode,
+        mode=mode,
+        temperature=temperature
+    )
     return device.send_data(message)
