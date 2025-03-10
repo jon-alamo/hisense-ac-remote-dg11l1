@@ -13,4 +13,4 @@ license = {file = "LICENSE"}
 
 
 [tool.setuptools.package-data]
-"dg11l" = ["assets/*"]
+"dg11l1" = ["assets/*"]
