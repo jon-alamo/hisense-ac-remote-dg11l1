@@ -1,6 +1,7 @@
 import broadlink as blk
 import base64
-import features
+
+import dg11l.features as features
 
 
 def get_device(ip):
