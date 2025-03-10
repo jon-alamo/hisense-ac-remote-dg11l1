@@ -85,7 +85,7 @@ def validate_parameters(
         raise exc.InvalidValue(FanModes)
     if mode is not None and mode not in Modes.values():
         raise exc.InvalidValue(Modes)
-    if temperature not in range(*Ranges.control.value):
+    if temperature is not None and temperature not in range(*Ranges.control.value):
         raise exc.InvalidTemperature('control', Ranges.control.value)
     if ifeel_temp is not None and ifeel_temp not in range(*Ranges.ifeel.value):
         raise exc.InvalidTemperature('ifeel', Ranges.ifeel.value)
