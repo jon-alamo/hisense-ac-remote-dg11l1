@@ -40,7 +40,7 @@ class BaseEnum(Enum):
 
 
 class FanModes(BaseEnum):
-    name = 'fan_mode'
+    name = "fan_mode"
     auto = "auto"
     high = "high"
     medium_high = "medium_high"
@@ -53,13 +53,13 @@ class FanModes(BaseEnum):
 
 
 class States(BaseEnum):
-    name = 'state'
+    name = "state"
     on = "on"
     off = "off"
 
 
 class Modes(BaseEnum):
-    name = 'mode'
+    name = "mode"
     heat = "heat"
     cool = "cool"
     smart = "smart"
