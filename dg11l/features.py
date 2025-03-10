@@ -140,3 +140,22 @@ def get_operation_mode_message(
         return encoder.encode_message(message)
     return message
 
+
+def get_remote_action_message(
+        state: str = None,
+        ifeel_temp: int = None,
+        fan_mode: str = None,
+        mode: str = None,
+        temperature: int = None
+):
+    if state is not None:
+        message = get_state_message(state)
+    elif ifeel_temp is not None:
+        message = get_ifeel_sensor_message(ifeel_temp)
+    elif fan_mode is not None and mode is not None and temperature is not None:
+        message = get_operation_mode_message(
+            fan_mode, mode, temperature
+        )
+    else:
+        raise ValueError('Invalid parameters')
+    return message
