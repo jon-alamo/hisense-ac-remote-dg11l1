@@ -5,11 +5,11 @@ import json
 from enum import Enum
 
 
-BASE_CODES = "alt_codes.json"
+BASE_CODES = "base_codes.json"
 
 
 def get_assets_path() -> str:
-    return str(importlib.resources.files("dg11l1.assets") / "alt_codes.json")
+    return str(importlib.resources.files("dg11l1.assets") / BASE_CODES)
 
 
 with open(get_assets_path(), 'r') as f:
@@ -113,13 +113,10 @@ def get_state_message(state: str):
 
 def get_ifeel_sensor_message(
         ifeel_temp: int,
-        encoded: bool = True
 ) -> list[int] | bytes:
     validate_parameters(ifeel_temp=ifeel_temp)
     temp_byte = _get_temp_sensor_part(ifeel_temp)
     message = encoder.compose_message(temp_byte, _codes['ifeel'])
-    if encoded:
-        return encoder.encode_message(message)
     return message
 
 
@@ -127,14 +124,11 @@ def get_operation_mode_message(
         fan_mode: str,
         mode: str,
         temperature: int,
-        encoded: bool = True
 ) -> list[int] | bytes:
     validate_parameters(fan_mode=fan_mode, mode=mode, temperature=temperature)
     base_code = _codes[fan_mode]
     mode_temp_part = _get_mode_and_temp_set_part(mode, temperature)
     message = encoder.compose_message(mode_temp_part, base_code)
-    if encoded:
-        return encoder.encode_message(message)
     return message
 
 
@@ -158,5 +152,17 @@ def get_remote_action_message(
     return message
 
 
-def get_remote_action_message_b64(**kwargs):
-    return encoder.b64_message(get_remote_action_message(**kwargs))
+def get_remote_action_message_b64(
+        state: str = None,
+        ifeel_temp: int = None,
+        fan_mode: str = None,
+        mode: str = None,
+        temperature: int = None
+):
+    return encoder.b64_message(get_remote_action_message(
+        state=state,
+        ifeel_temp=ifeel_temp,
+        fan_mode=fan_mode,
+        mode=mode,
+        temperature=temperature
+    ))

@@ -67,5 +67,5 @@ def encode_message(code: list[int]) -> bytes:
     return bytes(raw_bits)
 
 
-def b64_message(code: list[int]) -> bytes:
-    return base64.b64encode(encode_message(code))
+def b64_message(code: list[int]) -> str:
+    return base64.b64encode(encode_message(code)).decode('utf-8')

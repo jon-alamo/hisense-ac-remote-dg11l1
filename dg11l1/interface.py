@@ -23,11 +23,11 @@ def send_remote_action(
         mode: str = None,
         temperature: int = None
 ):
-    message = features.get_remote_action_message(
+    b64_message = features.get_remote_action_message_b64(
         state=state,
         ifeel_temp=ifeel_temp,
         fan_mode=fan_mode,
         mode=mode,
         temperature=temperature
     )
-    return device.send_data(message)
+    send_b64code(device, b64_message)
