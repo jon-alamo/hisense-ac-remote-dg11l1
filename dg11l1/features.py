@@ -1,12 +1,15 @@
 import importlib.resources
-import dg11l.encoder as encoder
-import dg11l.exceptions as exc
+import dg11l1.encoder as encoder
+import dg11l1.exceptions as exc
 import json
 from enum import Enum
 
 
+BASE_CODES = "alt_codes.json"
+
+
 def get_assets_path() -> str:
-    return str(importlib.resources.files("dg11l.assets") / "base_codes.json")
+    return str(importlib.resources.files("dg11l1.assets") / "alt_codes.json")
 
 
 with open(get_assets_path(), 'r') as f:
@@ -17,7 +20,7 @@ _MODES = {
     'heat': '0000',
     'smart': '0001',
     'cool': '0010',
-    'humid': '0011',
+    'dry': '0011',
     'fan': '0100'
 }
 
@@ -64,12 +67,12 @@ class Modes(BaseEnum):
     cool = "cool"
     smart = "smart"
     fan = "fan"
-    humid = "humid"
+    humid = "dry"
 
 
 class Ranges(BaseEnum):
-    ifeel = [0, 36]
-    control = [16, 30]
+    ifeel = [0, 37]
+    control = [16, 31]
 
 
 def validate_parameters(
@@ -96,12 +99,6 @@ def _get_temp_sensor_part(temperature: int) -> dict:
 
 
 def _get_mode_and_temp_set_part(mode: str, temperature: int) -> dict:
-    if mode not in _MODES:
-        raise ValueError(
-            'mode must be one of "heat", "smart", "cool", "humid" or "fan"'
-        )
-    if not 16 <= temperature <= 30:
-        raise ValueError('Temperature must be one between 16 and 30 ºC')
     if mode in _FORCED_TEMPS:
         temperature = _FORCED_TEMPS[mode]
     temp_bits = f'{temperature-16:04b}' + _MODES[mode]
@@ -159,3 +156,7 @@ def get_remote_action_message(
     else:
         raise ValueError('Invalid parameters')
     return message
+
+
+def get_remote_action_message_b64(**kwargs):
+    return encoder.b64_message(get_remote_action_message(**kwargs))

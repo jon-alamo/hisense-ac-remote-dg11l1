@@ -1,4 +1,5 @@
 from functools import reduce
+import base64
 import typing as typ
 
 RAW_INIT = [38, 0, 92, 1, 0, 1, 29, 144]
@@ -47,7 +48,8 @@ def compose_message(input_bytes: dict, base_code: list[int]) -> list[int]:
     for position, data in input_bytes.items():
         base_code[position] = data
     base_code[13] = get_xor(base_code[2:13])
-    base_code[20] = get_xor(base_code[14:20])
+    if len(base_code) > 14:
+        base_code[-1] = get_xor(base_code[14:-1])
     return base_code
 
 
@@ -63,3 +65,7 @@ def encode_message(code: list[int]) -> bytes:
     raw_bits_data = serialize_bits_to_raw_format(lsb_first_bits)
     raw_bits = format_raw_bits_sequence(raw_bits_data)
     return bytes(raw_bits)
+
+
+def b64_message(code: list[int]) -> bytes:
+    return base64.b64encode(encode_message(code))

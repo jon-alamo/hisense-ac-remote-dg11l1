@@ -1,6 +1,6 @@
 import unittest
 
-import dg11l.features as features
+import dg11l1.features as features
 
 
 class TestValidation(unittest.TestCase):
