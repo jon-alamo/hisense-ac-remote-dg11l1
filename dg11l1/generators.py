@@ -24,7 +24,9 @@ base_parameters = {
         "medium",
         "medium_high",
         "high",
-        "auto"
+        "auto",
+        "economy",
+        "quiet"
     ],
     "commands": {
 
